@@ -1,4 +1,4 @@
-# Retail-Transaction-Analyisis
+# Retail-Transaction-Analysis
 A visually engaging and interactive Sales & Marketing Analysis Dashboard built using Django and HTML/CSS, allowing users to explore insights from marketing datasets.
 
 Project Overview
