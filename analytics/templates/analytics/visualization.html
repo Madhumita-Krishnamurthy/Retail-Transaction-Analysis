@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ chart_name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            background: #333;
+            color: white;
+            padding: 15px;
+            height: 100vh;
+
+            /* Slide-in effect on page load */
+            transform: translateX(-100%);
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Sidebar Links */
+        .sidebar a {
+            color: white;
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Smooth slide effect on hover */
+        .sidebar a:hover {
+            background: #575757;
+            padding-left: 20px;
+        }
+
+        /* Underline Animation */
+        .sidebar a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: white;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sidebar a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Sidebar Expand Effect on Hover */
+        .sidebar:hover {
+            width: 270px;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        img {
+            max-width: 80%;
+            height: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2><a href="{% url 'home' %}" style="color: white; text-decoration: none;">Sales Analysis</a></h2>
+        {% for key, chart_name in all_charts.items %}
+        <a href="{% url 'visualization' key %}">{{ chart_name }}</a>
+        {% endfor %}
+    </div>
+
+    <div class="content">
+        <h1>{{ chart_name }}</h1>
+        <div style="text-align: center;">
+            <img src="/static/{{ chart_data.image }}" alt="{{ chart }}">
+        </div>
+        <p><strong>Insight:</strong> </p>
+        <p>{{ chart_data.insight }}</p>
+    </div>
+
+</body>
+
+</html>
